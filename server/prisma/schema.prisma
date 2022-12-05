@@ -25,6 +25,7 @@ model Customer {
   firstName String?
   id        String   @id @default(cuid())
   lastName  String?
+  phone     String?
   updatedAt DateTime @updatedAt
 }
 
