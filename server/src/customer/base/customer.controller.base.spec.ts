@@ -24,6 +24,7 @@ const CREATE_INPUT = {
   firstName: "exampleFirstName",
   id: "exampleId",
   lastName: "exampleLastName",
+  phone: "examplePhone",
   updatedAt: new Date(),
 };
 const CREATE_RESULT = {
@@ -32,6 +33,7 @@ const CREATE_RESULT = {
   firstName: "exampleFirstName",
   id: "exampleId",
   lastName: "exampleLastName",
+  phone: "examplePhone",
   updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
@@ -41,6 +43,7 @@ const FIND_MANY_RESULT = [
     firstName: "exampleFirstName",
     id: "exampleId",
     lastName: "exampleLastName",
+    phone: "examplePhone",
     updatedAt: new Date(),
   },
 ];
@@ -50,6 +53,7 @@ const FIND_ONE_RESULT = {
   firstName: "exampleFirstName",
   id: "exampleId",
   lastName: "exampleLastName",
+  phone: "examplePhone",
   updatedAt: new Date(),
 };
 
@@ -172,6 +176,28 @@ describe("Customer", () => {
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
+      });
+  });
+
+  test("POST /customers existing resource", async () => {
+    let agent = request(app.getHttpServer());
+    await agent
+      .post("/customers")
+      .send(CREATE_INPUT)
+      .expect(HttpStatus.CREATED)
+      .expect({
+        ...CREATE_RESULT,
+        createdAt: CREATE_RESULT.createdAt.toISOString(),
+        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
+      })
+      .then(function () {
+        agent
+          .post("/customers")
+          .send(CREATE_INPUT)
+          .expect(HttpStatus.CONFLICT)
+          .expect({
+            statusCode: HttpStatus.CONFLICT,
+          });
       });
   });
 
