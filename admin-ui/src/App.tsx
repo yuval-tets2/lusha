@@ -9,14 +9,6 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
-import { CustomerList } from "./customer/CustomerList";
-import { CustomerCreate } from "./customer/CustomerCreate";
-import { CustomerEdit } from "./customer/CustomerEdit";
-import { CustomerShow } from "./customer/CustomerShow";
-import { EventList } from "./event/EventList";
-import { EventCreate } from "./event/EventCreate";
-import { EventEdit } from "./event/EventEdit";
-import { EventShow } from "./event/EventShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -36,7 +28,7 @@ const App = (): React.ReactElement => {
   return (
     <div className="App">
       <Admin
-        title={"My service"}
+        title={"My service-1"}
         dataProvider={dataProvider}
         authProvider={jwtAuthProvider}
         theme={theme}
@@ -49,20 +41,6 @@ const App = (): React.ReactElement => {
           edit={UserEdit}
           create={UserCreate}
           show={UserShow}
-        />
-        <Resource
-          name="Customer"
-          list={CustomerList}
-          edit={CustomerEdit}
-          create={CustomerCreate}
-          show={CustomerShow}
-        />
-        <Resource
-          name="Event"
-          list={EventList}
-          edit={EventEdit}
-          create={EventCreate}
-          show={EventShow}
         />
       </Admin>
     </div>
