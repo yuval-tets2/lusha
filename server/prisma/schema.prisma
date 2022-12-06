@@ -1,5 +1,5 @@
-datasource mysql {
-  provider = "mysql"
+datasource postgres {
+  provider = "postgresql"
   url      = env("DB_URL")
 }
 
@@ -16,24 +16,4 @@ model User {
   roles     Json
   updatedAt DateTime @updatedAt
   username  String   @unique
-}
-
-model Customer {
-  createdAt DateTime @default(now())
-  email     String?
-  events    Event[]
-  firstName String?
-  id        String   @id @default(cuid())
-  lastName  String?
-  updatedAt DateTime @updatedAt
-}
-
-model Event {
-  createdAt  DateTime  @default(now())
-  customer   Customer? @relation(fields: [customerId], references: [id])
-  customerId String?
-  date       DateTime?
-  id         String    @id @default(cuid())
-  name       String?
-  updatedAt  DateTime  @updatedAt
 }
